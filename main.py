@@ -32,12 +32,18 @@ async def health():
 	return { "status": "healthy", "model_version": MODEL_VERSION}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 @app.get("/version")
 async def version():
 	return {"model-version": MODEL_VERSION}
 =======
+=======
+>>>>>>> features/first
 # Version check
 @app.get("/version")
 async def version():
 	return {"model_version": MODEL_VERSION}
+<<<<<<< HEAD
+>>>>>>> features/first
+=======
 >>>>>>> features/first
