@@ -30,3 +30,7 @@ async def predict(request: PredictionRequest):
 @app.get("/health")
 async def health():
 	return { "status": "healthy", "model_version": MODEL_VERSION}
+
+@app.get("/version")
+async def version():
+	return {"model-version": MODEL_VERSION}
