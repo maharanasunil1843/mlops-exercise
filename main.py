@@ -14,6 +14,11 @@ app = FastAPI(title="Mock ML API")
 # Pydantic model for request
 class PredictionRequest(BaseModel):
 	features: list[float]
+ 
+# Welcome endpoint
+@app.get("/")
+async def welcome():
+	return {"message": "Welcome to the Mock ML API!"}
 
 # Mock prediction endpoint
 @app.post("/predict")
