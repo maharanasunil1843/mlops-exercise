@@ -1,0 +1,34 @@
+# Security Critical
+.env
+.env.*
+secrets/**
+
+# Development Artifacts
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Version Control
+.git/
+.gitignore
+.gitmodules
+
+# Docker/Compose
+docker-compose*
+Dockerfile*
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.jenkinsfile
+
+# IDEs
+.vscode/
+.idea/
+
+# Local/Temp Files
+*.swp
+*.swo
+*.log
