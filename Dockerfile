@@ -11,8 +11,10 @@ COPY . .
 RUN pip install --no-cache-dir uv && \
     uv sync --frozen
 
-# Expose port 8000
-EXPOSE 8000
+RUN mkdir -p /app/logs
+
+# Expose port as environment variable
+ENV PORT=3000
 
 # Run FastAPI in development mode to match local behavior
-CMD ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uv run uvicorn main:app --host 0.0.0.0 --port ${PORT} --reload"]
