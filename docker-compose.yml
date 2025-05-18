@@ -2,13 +2,48 @@ version: "3.9"
 
 services:
   api:
-    image: maharanasunil1843/api-exercise:01 # Use the pre-built image from Docker Hub. Checks for the image locally first or else pulls it from docker hub.
+    image: maharanasunil1843/api-exercise:02
     container_name: api
     ports:
-      - "8080:3030" # Map container port 3030 to host port 8080
+      - "8080:3030"
     environment:
-      - PORT=3030 # Pass the PORT environment variable
+      - PORT=3030
+      - MYSQL_HOST=db
+      - MYSQL_PORT=3306
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=secret
+      - MYSQL_DATABASE=predictions
     volumes:
-      - ./logs:/app/logs # Mount the logs directory for persistent logging
+      - ./logs:/app/logs
     env_file:
-      - .env # Load additional environment variables from the .env file
+      - .env
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=predictions
+    ports:
+      - "3307:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  db-data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
