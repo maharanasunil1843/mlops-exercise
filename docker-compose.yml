@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  api:
+    image: maharanasunil1843/api-exercise:01 # Use the pre-built image from Docker Hub. Checks for the image locally first or else pulls it from docker hub.
+    container_name: api
+    ports:
+      - "8080:3030" # Map container port 3030 to host port 8080
+    environment:
+      - PORT=3030 # Pass the PORT environment variable
+    volumes:
+      - ./logs:/app/logs # Mount the logs directory for persistent logging
+    env_file:
+      - .env # Load additional environment variables from the .env file
